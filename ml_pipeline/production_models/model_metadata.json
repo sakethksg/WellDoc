@@ -1,0 +1,32 @@
+{
+  "model_name": "XGBoost",
+  "model_type": "XGBClassifier",
+  "training_date": "2025-09-09T11:08:05.773940",
+  "performance_metrics": {
+    "auroc": 0.9931693989071038,
+    "auprc": 0.9880484478467714,
+    "test_accuracy": 0.967032967032967,
+    "composite_score": 0.9858937321081436
+  },
+  "dataset_info": {
+    "total_patients": 910,
+    "training_samples": 728,
+    "test_samples": 182,
+    "features_count": 35
+  },
+  "risk_categories": {
+    "low_risk_threshold": 0.3,
+    "high_risk_threshold": 0.7,
+    "classes": [
+      "high",
+      "low",
+      "medium"
+    ]
+  },
+  "clinical_validation": {
+    "overfitting_risk": "LOW",
+    "medical_realism": "Review needed",
+    "explainability": "SHAP-enabled",
+    "clinical_recommendations": "Integrated"
+  }
+}

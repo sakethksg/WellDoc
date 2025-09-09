@@ -1,0 +1,200 @@
+{
+  "feature_names": [
+    "age",
+    "gender_male",
+    "race_white",
+    "race_black",
+    "race_asian",
+    "race_hispanic",
+    "has_diabetes",
+    "has_hypertension",
+    "has_heart_disease",
+    "has_kidney_disease",
+    "has_stroke",
+    "has_copd",
+    "has_depression",
+    "has_cancer",
+    "total_conditions",
+    "comorbidity_count",
+    "bmi",
+    "systolic_bp",
+    "diastolic_bp",
+    "heart_rate",
+    "glucose",
+    "hba1c",
+    "cholesterol",
+    "has_bmi_data",
+    "has_bp_data",
+    "has_glucose_data",
+    "has_hba1c_data",
+    "total_encounters",
+    "inpatient_visits",
+    "emergency_visits",
+    "outpatient_visits",
+    "has_inpatient",
+    "has_emergency",
+    "medication_count",
+    "polypharmacy"
+  ],
+  "clinical_mapping": {
+    "age": "Patient Age",
+    "bmi": "Body Mass Index",
+    "systolic_bp": "Systolic Blood Pressure",
+    "diastolic_bp": "Diastolic Blood Pressure",
+    "heart_rate": "Heart Rate",
+    "glucose_level": "Blood Glucose Level",
+    "hba1c": "HbA1c (Diabetes Control)",
+    "comorbidity_count": "Number of Comorbidities",
+    "medication_count": "Number of Medications",
+    "has_diabetes": "Diabetes Diagnosis",
+    "has_hypertension": "Hypertension Diagnosis",
+    "has_heart_failure": "Heart Failure Diagnosis",
+    "has_copd": "COPD Diagnosis",
+    "has_ckd": "Chronic Kidney Disease",
+    "gender_male": "Male Gender",
+    "encounters_last_year": "Healthcare Visits (Last Year)",
+    "emergency_visits": "Emergency Department Visits"
+  },
+  "feature_importance_shap": [
+    {
+      "feature": "medication_count",
+      "shap_importance": 0.8016365257134469
+    },
+    {
+      "feature": "comorbidity_count",
+      "shap_importance": 0.5674864663608037
+    },
+    {
+      "feature": "age",
+      "shap_importance": 0.5634201115815397
+    },
+    {
+      "feature": "total_conditions",
+      "shap_importance": 0.3894044111633222
+    },
+    {
+      "feature": "bmi",
+      "shap_importance": 0.30661346737860845
+    },
+    {
+      "feature": "total_encounters",
+      "shap_importance": 0.28812108375399065
+    },
+    {
+      "feature": "inpatient_visits",
+      "shap_importance": 0.18638575490203943
+    },
+    {
+      "feature": "diastolic_bp",
+      "shap_importance": 0.16136867846074215
+    },
+    {
+      "feature": "has_heart_disease",
+      "shap_importance": 0.14594438961669462
+    },
+    {
+      "feature": "heart_rate",
+      "shap_importance": 0.12983579442083884
+    },
+    {
+      "feature": "systolic_bp",
+      "shap_importance": 0.12314413313958783
+    },
+    {
+      "feature": "outpatient_visits",
+      "shap_importance": 0.12009775233831074
+    },
+    {
+      "feature": "emergency_visits",
+      "shap_importance": 0.09590574013897014
+    },
+    {
+      "feature": "glucose",
+      "shap_importance": 0.07502715179574246
+    },
+    {
+      "feature": "polypharmacy",
+      "shap_importance": 0.050939321386173596
+    },
+    {
+      "feature": "race_asian",
+      "shap_importance": 0.04912848177646848
+    },
+    {
+      "feature": "has_inpatient",
+      "shap_importance": 0.04786892814315723
+    },
+    {
+      "feature": "hba1c",
+      "shap_importance": 0.04599734864972883
+    },
+    {
+      "feature": "has_hypertension",
+      "shap_importance": 0.044281557890473375
+    },
+    {
+      "feature": "has_hba1c_data",
+      "shap_importance": 0.03486532806439188
+    },
+    {
+      "feature": "has_glucose_data",
+      "shap_importance": 0.02498477164878942
+    },
+    {
+      "feature": "has_kidney_disease",
+      "shap_importance": 0.014293652843734633
+    },
+    {
+      "feature": "gender_male",
+      "shap_importance": 0.00875096533009322
+    },
+    {
+      "feature": "race_hispanic",
+      "shap_importance": 0.0073359207321484375
+    },
+    {
+      "feature": "has_diabetes",
+      "shap_importance": 0.007240763048055122
+    },
+    {
+      "feature": "has_emergency",
+      "shap_importance": 0.005713507389855531
+    },
+    {
+      "feature": "race_white",
+      "shap_importance": 0.0024157099841754974
+    },
+    {
+      "feature": "has_depression",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "has_copd",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "has_cancer",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "has_stroke",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "race_black",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "has_bmi_data",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "cholesterol",
+      "shap_importance": 0.0
+    },
+    {
+      "feature": "has_bp_data",
+      "shap_importance": 0.0
+    }
+  ]
+}
