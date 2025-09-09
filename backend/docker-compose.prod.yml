@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  welldoc-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: welldoc-api-prod
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=production
+      - LOG_LEVEL=info
+      - WORKERS=2
+    volumes:
+      # Mount the artifacts directory to persist model files
+      - ./artifacts:/app/artifacts:ro
+      # Mount logs directory for persistent logging
+      - ./logs:/app/logs
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - welldoc-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Nginx reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    container_name: welldoc-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - welldoc-backend
+    restart: always
+    networks:
+      - welldoc-network
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: welldoc-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    networks:
+      - welldoc-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  welldoc-network:
+    driver: bridge
+
+volumes:
+  redis_data:

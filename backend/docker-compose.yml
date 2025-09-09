@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  welldoc-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: welldoc-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=production
+      - LOG_LEVEL=info
+    volumes:
+      # Mount the artifacts directory to persist model files
+      - ./artifacts:/app/artifacts:ro
+      # Mount logs directory for persistent logging
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - welldoc-network
+
+  # Optional: Add Redis for caching (uncomment if needed)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: welldoc-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   restart: unless-stopped
+  #   networks:
+  #     - welldoc-network
+
+networks:
+  welldoc-network:
+    driver: bridge
+
+# volumes:
+#   redis_data:
