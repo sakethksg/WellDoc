@@ -143,8 +143,9 @@ async def startup_event():
         raise
 
 @app.get("/")
+@app.post("/")
 async def root():
-    """API root endpoint"""
+    """API root endpoint - supports both GET and POST for compatibility"""
     return {
         "message": "WellDoc AI Risk Prediction API",
         "version": "2.0.0",
@@ -160,8 +161,9 @@ async def root():
     }
 
 @app.get("/health", response_model=HealthStatus)
+@app.post("/health", response_model=HealthStatus)
 async def health_check(predictor: RiskPredictor = Depends(get_risk_predictor)):
-    """Comprehensive health check including model status"""
+    """Comprehensive health check including model status - supports both GET and POST"""
     try:
         health_status = predictor.health_check()
         return HealthStatus(**health_status)
@@ -232,6 +234,23 @@ async def get_required_features(predictor: RiskPredictor = Depends(get_risk_pred
     except Exception as e:
         logger.error(f"Features info error: {e}")
         raise HTTPException(status_code=500, detail="Failed to retrieve feature information")
+
+@app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"])
+async def catch_all(path: str):
+    """Catch-all endpoint for unmatched routes"""
+    return {
+        "error": "Endpoint not found",
+        "path": f"/{path}",
+        "message": "This endpoint does not exist. Check /docs for available endpoints.",
+        "available_endpoints": [
+            "/",
+            "/health", 
+            "/predict",
+            "/model/info",
+            "/model/features",
+            "/docs"
+        ]
+    }
 
 if __name__ == "__main__":
     uvicorn.run(
